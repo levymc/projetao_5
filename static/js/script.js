@@ -4,15 +4,16 @@ const url = "https://mock-api.driven.com.br/api/v6/uol/participants"
 
 // const form = document.querySelector('form');
 
+let newUser;
 
 window.addEventListener('load', function() {
-    const newUser = localStorage.getItem('newUser');
+    newUser = localStorage.getItem('newUser');
     if (newUser) {
-        novoAcesso(newUser);
+        novoAcesso();
     }
 });
 
-function novoAcesso(newUser){
+function novoAcesso(){
     console.log(11111, newUser)
     const lista = document.querySelector('.msg-list');
     console.log(lista);
@@ -33,6 +34,10 @@ function novoAcesso(newUser){
 
 };
   
+function novaPostGeral(){
+    const msg = document.querySelector(".msg-input input").value;
+    console.log(newUser, msg);
+};
 
 
 
