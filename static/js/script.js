@@ -4,6 +4,7 @@ const url = "https://mock-api.driven.com.br/api/v6/uol/participants"
 
 // const form = document.querySelector('form');
 
+
 window.addEventListener('load', function() {
     const newUser = localStorage.getItem('newUser');
     if (newUser) {
@@ -24,7 +25,7 @@ function novoAcesso(newUser){
     const html = `
     <li class="msg-access">
         <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
-        <div class="msg-text">${newUser.value} entra na sala...</div>
+        <div class="msg-text">${newUser} entra na sala...</div>
     </li>
     `;
 

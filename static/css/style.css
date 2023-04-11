@@ -87,19 +87,22 @@
     gap: 0.25em;
     width: 100%;
 }
-.msg-acess{
+.msg-access{
+    gap: 1em;
     padding: 0.75em;
     box-sizing: border-box;
     display: flex;
     background-color: #DCDCDC;
 }
 .msg-message{
+    gap: 1em;
     padding: 0.75em;
     box-sizing: border-box;
     display: flex;
     background-color: #FFFFFF;
 }
 .msg-private{
+    gap: 1em;
     display: flex;
     box-sizing: border-box;
     padding: 0.75em;
