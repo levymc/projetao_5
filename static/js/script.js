@@ -5,6 +5,10 @@ const url = "https://mock-api.driven.com.br/api/v6/uol/participants"
 // const form = document.querySelector('form');
 
 let newUser;
+const agora = new Date();
+const hora = agora.getHours();
+const minuto = agora.getMinutes();
+const segundo = agora.getSeconds();
 
 window.addEventListener('load', function() {
     newUser = localStorage.getItem('newUser');
@@ -18,10 +22,7 @@ function novoAcesso(){
     const lista = document.querySelector('.msg-list');
     console.log(lista);
 
-    const agora = new Date();
-    const hora = agora.getHours();
-    const minuto = agora.getMinutes();
-    const segundo = agora.getSeconds();
+    
 
     const html = `
     <li class="msg-access">
@@ -31,13 +32,27 @@ function novoAcesso(){
     `;
 
     lista.innerHTML += html
-
 };
   
 function novaPostGeral(){
     const msg = document.querySelector(".msg-input input").value;
     console.log(newUser, msg);
+
+    const lista = document.querySelector('.msg-list');
+
+    const html = `
+    <li class="msg-message">
+        <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
+        <div class="msg-text">${newUser} para Todos: ${msg}</div>
+    </li>
+    `;
+
+    lista.innerHTML += html
+
 };
+
+
+
 
 
 
