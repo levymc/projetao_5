@@ -1,21 +1,111 @@
+/* TUDO */
 *{
     font-size: 16px;
-    font-family: "Roboto", "sans-serif";
+    font-family: "Roboto", sans-serif;
+    user-select: none;
 }
 .container{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100%;
-    background-color: beige;
+    background-color: rgb(74, 74, 2);
 }
+
+/* Acesso */
+.container-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+}
+/* .logo-login{
+    display: flex;
+    justify-content:center;
+    margin-top: 6em;
+} */
+.logo-login img{
+    width: 7em;
+}
+.form-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 70%;
+}
+.form-login input{
+    text-align: center;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    width: 100%;
+    height: 2.75em;
+}
+.form-login  button{
+    width: 40%;
+    height: 2.5em;
+    background: #E7E7E7;
+    border-radius: 9px;
+    border: 1px solid #D7D7D7;
+}
+
+/* Superior */
 .container-superior{
-    position: absolute;
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
     top: 0;
     left: 0;
     width: 100%;
     height: 5em;
     background-color: rgb(221, 163, 77);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
+.logo{
+    position: absolute;
+    width: 75px;
+    height: 53px;
+    left: 22px;
+    top: 16px;
+}
+.person{
+    position: absolute;
+    right: 2em;
+}
+
+/* Principal */
+.container-principal{
+    margin-top: 1.5em;
+    display: flex;
+    width: 100%;
+    height: 100vh;/*Trocar para auto depois */
+    background-color: #560303;
+}
+.msg-list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    width: 100%;
+}
+.msg-acess{
+    padding: 0.75em;
+    box-sizing: border-box;
+    display: flex;
+    background-color: #DCDCDC;
+}
+.msg-message{
+    padding: 0.75em;
+    box-sizing: border-box;
+    display: flex;
+    background-color: #FFFFFF;
+}
+.msg-private{
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.75em;
+    background-color: #FFDEDE;
+}
+/* Footer */
 .footer{
     position: absolute;
     display: flex;
@@ -39,9 +129,12 @@
 }
 .aviao{
     position: absolute;
-    right: 0.2em;
-    bottom: 0.2em;
+    right: 1em;
+    bottom: 1.4em;
     z-index: 1000;
 }
-.avia
+.aviao ion-icon{
+    font-size: 25px;
+    color: black;
+}
   
