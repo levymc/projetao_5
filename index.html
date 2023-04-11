@@ -4,42 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projetão 5 - Chat UOL</title>
+    <title>Projetão 5 - Acesso</title>
     <link rel="stylesheet" href="./static/css/reset.css">
     <link rel="stylesheet" href="./static/css/style.css">
 </head>
 <body>
     <main>
-        <div class="container">
-            <div class="container-superior">
-                <div class="logo"><img src="./static/img/logo.svg" alt="logo"></div>
-                <div class="person"><img src="./static/img/person.svg" alt="person"></div>
+        <div class="container-login">
+            <div class="logo-login">
+                <img src="./static/img/logo.svg" alt="logo">
             </div>
-            <div class="container-principal">
-                <ul class="msg-list">
-                    <li class="msg-access">
-                      <div class="msg-hora">(09:21:45)</div>
-                      <div class="msg-text">João  entra na sala...</div>
-                    </li>
-                    <li class="msg-message">
-                      <div class="msg-hora">(09:22:28)</div>
-                      <div class="msg-text">João para Todos:  Bom dia</div>
-                    </li>
-                    <li class="msg-private">
-                      <div class="msg-hora">(09:22:38)</div>
-                      <div class="msg-text">João reservadamente para Maria: Oi gatinha quer tc?</div>
-                    </li>
-                  </ul>
-                  
-            </div>
-            <div class="footer">
-                <div class="msg-input"><input type="text" placeholder="Escreva aqui"></div>
-                <div class="aviao"><a href="#"><ion-icon name="paper-plane-outline"></ion-icon></a></div>
-            </div>
+            <form class="form-login">
+                <input type="text" id="name" name="name" placeholder="Digite seu nome">
+                <button id="entrar" type="submit">Entrar</button>
+            </form>
         </div>
     </main>    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="./static/js/script.js"></script>
-  </body>
+    <script src="./static/js/access.js"></script>
+</body>
 </html>

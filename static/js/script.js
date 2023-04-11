@@ -29,7 +29,7 @@ function novoAcesso(newUser){
     </li>
     `;
 
-    lista.insertAdjacentHTML('beforeend', html)
+    lista.innerHTML += html
 
 };
   
