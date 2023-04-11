@@ -1,6 +1,6 @@
 # Projetão 5 - Chat UOL
 
-Esse projeto faz parte do curso Full Stack da Driven e tem como objetivo desenvolver um chat semelhante ao da UOL, famoso nos anos 2005 pra frente. O chat será desenvolvido utilizando as seguintes tecnologias:
+Esse projeto faz parte do curso Full Stack da Driven e tem como objetivo desenvolver um chat semelhante ao da UOL, famoso nos anos 1996 pra frente. O chat será desenvolvido utilizando as seguintes tecnologias:
 
 * Javascript
 * HTML
