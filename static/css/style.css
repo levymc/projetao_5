@@ -1,5 +1,6 @@
 *{
     font-size: 16px;
+    font-family: "Roboto", "sans-serif";
 }
 .container{
     display: flex;
@@ -17,9 +18,30 @@
 }
 .footer{
     position: absolute;
+    display: flex;
+    align-items: center;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 5em;
     background-color: blueviolet;
 }
+.msg-input input{
+    font-style: italic;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+
+  }
+.msg-input{
+    width: 100%;
+    height: 100%;
+}
+.aviao{
+    position: absolute;
+    right: 0.2em;
+    bottom: 0.2em;
+    z-index: 1000;
+}
+.avia
+  
