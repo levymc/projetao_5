@@ -54,6 +54,7 @@ function newPost(type){
             type: 'message',
         }
         enviarMensagem(dados);
+        document.querySelector('.msg-input input').value = ''
     }
     
     const lista = document.querySelector('.msg-list');
