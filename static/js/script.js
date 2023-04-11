@@ -15,7 +15,7 @@ const segundo = agora.getSeconds();
 window.addEventListener('load', function() {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
-        novoAcesso();
+        newPost(1);
     }
 });
 
@@ -32,7 +32,8 @@ function newPost(type){
         frase = `<div class="msg-text">${newUser} entra na sala...</div>`;
         dados = {
             name: newUser,
-          }
+          };
+          entraSala(dados);
     } else if (type == 2){
         classe = 'msg-private';
         frase = `<div class="msg-text">${newUser} reservadamente para Maria: ${msg}</div>`;
@@ -49,10 +50,10 @@ function newPost(type){
         dados = {
             from: newUser,
             to: "Nome do Destinatario",
-            text: frase,
+            text: msg,
             type: 'message',
-            time: `${hora}:${minuto}:${segundo}`
         }
+        enviarMensagem(dados);
     }
     
     const lista = document.querySelector('.msg-list');
@@ -65,29 +66,36 @@ function newPost(type){
     lista.innerHTML += html
 };
 
+function entraSala(dados){
+    axios.post("https://mock-api.driven.com.br/api/vm/uol/participants", dados).then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(2222, error);
+      });
+}
 
+function enviarMensagem(dados) {
+    axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error(2222, error);
+    });
+  }
 
-
-
-
-// document.querySelector('NOMEDOBOTAOAQUI').addEventListener('click', function(event) {
-//     event.preventDefault();
-//     const nomeDigitado = document.querySelector('#name').value;
-//     const dados = {
-//         name: nomeDigitado,
-//     };
-//     console.log(dados);
-//     fetch(url, {
-//         method: 'POST',
-//         body: dados
-//     })
-//     .then(response => response.json())    
-//     .then(data => console.log(data))
-//     .catch(error => console.error(error));
-// });
-
-
-
+function buscarMensagens() {
+    setInterval(() => {
+      axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
+        .then(response => {
+          // Faça o processamento das novas mensagens aqui
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }, 5000);
+}  
   
+buscarMensagens();
 
-  
