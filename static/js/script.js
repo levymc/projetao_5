@@ -17,38 +17,29 @@ window.addEventListener('load', function() {
     }
 });
 
-function novoAcesso(){
-    console.log(11111, newUser)
-    const lista = document.querySelector('.msg-list');
-    console.log(lista);
-
-    
-
-    const html = `
-    <li class="msg-access">
-        <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
-        <div class="msg-text">${newUser} entra na sala...</div>
-    </li>
-    `;
-
-    lista.innerHTML += html
-};
   
-function novaPostGeral(){
+function newPost(type){
+    let classe;
+    let frase;
     const msg = document.querySelector(".msg-input input").value;
-    console.log(newUser, msg);
-
+    if (type == 1){
+        classe = 'msg-access';
+        frase = `<div class="msg-text">${newUser} entra na sala...</div>`;
+    } else if (type == 2){
+        classe = 'msg-private';
+        frase = `<div class="msg-text">${newUser} reservadamente para Maria: ${msg}</div>`;
+    } else{
+        classe = 'msg-message';
+        frase = `<div class="msg-text">${newUser} para Todos: ${msg}</div>`;
+    }
     const lista = document.querySelector('.msg-list');
-
     const html = `
-    <li class="msg-message">
+    <li class="${classe}">
         <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
-        <div class="msg-text">${newUser} para Todos: ${msg}</div>
+        ${frase}
     </li>
     `;
-
     lista.innerHTML += html
-
 };
 
 
