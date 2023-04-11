@@ -87,7 +87,15 @@ function enviarMensagem(dados) {
 function buscarMensagens() {
     setInterval(() => {
       axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
-          // Faça o processamento das novas mensagens aqui
+          const lista = document.querySelector('.msg-list');
+          response.data.forEach(mensagem => {
+            lista.innerHTML += `
+                <li class="msg-message">
+                    <div class="msg-hora">(${mensagem.time})</div>
+                    <div class="msg-text">${mensagem.from} ${mensagem.text}</div>
+                </li>
+            `;
+          });
           console.log(response.data);
         })
         .catch(error => {
@@ -101,7 +109,6 @@ function conexao(){
     axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
       name: newUser,
     }).then(response => {
-      // Faça o processamento das novas mensagens aqui
       console.log(response.data);
     })
     .catch(error => {
@@ -111,5 +118,5 @@ function conexao(){
 }
 
 conexao();
-buscarMensagens();
+// buscarMensagens();
 
