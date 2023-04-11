@@ -1,0 +1,25 @@
+*{
+    font-size: 16px;
+}
+.container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: beige;
+}
+.container-superior{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5em;
+    background-color: rgb(221, 163, 77);
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5em;
+    background-color: blueviolet;
+}
