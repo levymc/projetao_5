@@ -59,7 +59,7 @@ function newPost(type){
     
     const lista = document.querySelector('.msg-list');
     const html = `
-    <li class="${classe}">
+    <li class="${classe}" data-test="message">
         <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
         ${frase}
     </li>
