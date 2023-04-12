@@ -159,3 +159,25 @@ grid-container {
     flex: 1;
     height: 5em;
 }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Esconder a sidebar inicialmente */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out; /* Adicionar uma transição suave */
+    z-index: 9999;
+  }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none; /* esconder por padrão */
+}
+  

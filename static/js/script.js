@@ -121,3 +121,21 @@ function conexao(){
 conexao();
 // buscarMensagens();
 
+const personBtn = document.querySelector('.person img');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.overlay');
+const html = document.querySelector('html');
+
+personBtn.addEventListener('click', () => {
+  sidebar.style.right = '0';
+  overlay.style.display = 'block';
+});
+
+
+// Para esconder a sidebar novamente quando o usuário clicar em outro lugar da página
+window.addEventListener('click', (e) => {
+  if (!sidebar.contains(e.target) && e.target !== personBtn) {
+    sidebar.style.right = '-100%';
+    overlay.style.display = 'none';
+  }
+});
