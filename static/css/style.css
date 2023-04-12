@@ -66,6 +66,9 @@ body{
     position: absolute;
     right: 2em;
 }
+.person img{
+    cursor: pointer;
+}
 
 /* Principal */
 .container-principal{
