@@ -18,14 +18,20 @@ window.addEventListener('load', function() {
         newPost(1);
     }
 });
+const input = document.querySelector(".msg-input input");
 
-  
+input.addEventListener('keydown', function(event) {
+  if (event.keyCode === 13) {
+    newPost(3);
+  }
+});
 function newPost(type){
     let classe;
     let frase;
     let quem;
     let dados = {};
-    const msg = document.querySelector(".msg-input input").value;
+    
+    const msg = input.value;
     
     if (type == 1){
         classe = 'msg-access';
