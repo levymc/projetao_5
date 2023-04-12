@@ -77,7 +77,7 @@ body{
     display: flex;
     width: 100%;
     height: auto;
-    max-height: calc(100vh - 10em);
+    max-height: calc(100vh - 15em);
     background-color: transparent;
 }
 .msg-list{

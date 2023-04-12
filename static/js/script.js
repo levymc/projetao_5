@@ -16,6 +16,7 @@ window.addEventListener('load', function() {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
         newPost(1);
+        buscarMensagens();
     }
 });
 
