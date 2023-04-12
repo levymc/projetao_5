@@ -118,7 +118,7 @@ function conexao(){
 }
 
 conexao();
-// buscarMensagens();
+buscarMensagens();
 
 function abrirSidebar(){
   const sidebar = document.querySelector('.sidebar');
