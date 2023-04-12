@@ -35,14 +35,14 @@ function newPost(type){
     
     if (type == 1){
         classe = 'msg-access';
-        frase = `<div class="msg-text">${newUser} entra na sala...</div>`;
+        frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
         dados = {
             name: newUser,
           };
           entraSala(dados);
     } else if (type == 2){
         classe = 'msg-private';
-        frase = `<div class="msg-text">${newUser} reservadamente para Maria: ${msg}</div>`;
+        frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
         dados = {
             from: newUser,
             to: "Nome do Destinatario",
@@ -52,7 +52,7 @@ function newPost(type){
         }
     } else{
         classe = 'msg-message';
-        frase = `<div class="msg-text">${newUser} para Todos: ${msg}</div>`;
+        frase = `<div class="msg-text" data-test="message">${newUser} para Todos: ${msg}</div>`;
         dados = {
             from: newUser,
             to: "Nome do Destinatario",
@@ -65,8 +65,8 @@ function newPost(type){
     
     const lista = document.querySelector('.msg-list');
     const html = `
-    <li class="${classe}" data-test="message">
-        <div class="msg-hora">(${hora}:${minuto}:${segundo})</div>
+    <li class="${classe}">
+        <div class="msg-hora" data-test="message">(${hora}:${minuto}:${segundo})</div>
         ${frase}
     </li>
     `;
@@ -98,7 +98,7 @@ function buscarMensagens() {
           response.data.forEach(mensagem => {
             const mensagemExistente = mensagensAdicionadas.find(m => m.text === mensagem.text && m.from === mensagem.from);
             if (!mensagemExistente) {
-            lista.innerHTML += `<li class="msg-message"> <div class="msg-hora">(${mensagem.time})</div> <div class="msg-text">${mensagem.from}: ${mensagem.text}</div> </li>` ;
+            lista.innerHTML += `<li class="msg-message"> <div class="msg-hora" data-test="message">(${mensagem.time})</div> <div class="msg-text" data-test="message">${mensagem.from}: ${mensagem.text}</div> </li>` ;
             mensagensAdicionadas.push(mensagem);
             }
             });
