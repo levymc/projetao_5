@@ -40,7 +40,7 @@ if (window.location.pathname === '/main.html') {
     }
   });
 
-  function newPost(type){
+  function newPost(type){ // dados = {from:, to:, text:,}
       let classe;
       let frase;
       let quem;
@@ -76,14 +76,14 @@ if (window.location.pathname === '/main.html') {
           document.querySelector('.msg-input input').value = ''
       }
       
-      const lista = document.querySelector('.msg-list');
-      const html = `
-      <li class="${classe}">
-          <div class="msg-hora" data-test="message">(${hora}:${minuto}:${segundo})</div>
-          ${frase}
-      </li>
-      `;
-      lista.innerHTML += html
+      // const lista = document.querySelector('.msg-list');
+      // const html = `
+      // <li class="${classe}">
+      //     <div class="msg-hora" data-test="message">(${hora}:${minuto}:${segundo})</div>
+      //     ${frase}
+      // </li>
+      // `;
+      // lista.innerHTML += html
   };
 
 
@@ -105,13 +105,30 @@ if (window.location.pathname === '/main.html') {
             const lista = document.querySelector('.msg-list');
             lista.innerHTML = ''
             for (i in response.data){
-              lista.innerHTML +=`
-              <li class="msg-message"> 
-                <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
-                <div class="msg-text" data-test="message">${response.data[i].from}: ${response.data[i].text}</div> 
-              </li>`
+              if (response.data[i].type === "message"){
+                lista.innerHTML +=`
+                <li class="msg-message"> 
+                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
+                  <div class="msg-text" data-test="message">${response.data[i].from} para Todos: ${response.data[i].text}</div> 
+                </li>`
+              }else if (response.data[i].type === "status"){
+                lista.innerHTML +=`
+                <li class="msg-access"> 
+                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
+                  <div class="msg-text" data-test="message">${response.data[i].from} entra na sala...</div> 
+                </li>
+                `
+              }else{
+                lista.innerHTML +=`
+                <li class="msg-private"> 
+                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div>    
+                  <div class="msg-text" data-test="message">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}}</div> 
+                </li>
+                `
+              }
+              
             }
-              // console.log(response.data);
+              console.log(response.data);
               })
           .catch(error => {
             console.error(999,error);
@@ -119,6 +136,10 @@ if (window.location.pathname === '/main.html') {
           });
       }, 3000);
   }  
+
+  function buscaParticipantes(){
+    
+  }
     
   function conexao(){
     setInterval(() => {
