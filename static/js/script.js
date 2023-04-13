@@ -16,9 +16,9 @@ function retornaAccess(){
   window.location.replace('index.html');
 }
 
-window.onload = function() {
-  // Seu código aqui
-}
+// window.onload = function() {
+//   // Seu código aqui
+// }
 
 
 window.addEventListener('load', function() {
@@ -29,9 +29,10 @@ window.addEventListener('load', function() {
     }
   }
 });
-const input = document.querySelector(".msg-input input");
+
 
 if (window.location.pathname === '/main.html') {
+  const input = document.querySelector(".msg-input input");
   input.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
       newPost(3);
@@ -90,6 +91,7 @@ if (window.location.pathname === '/main.html') {
   function enviarMensagem(dados) {
       axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
         console.log(response.data);
+        buscarMensagens();
       })
       .catch(error => {
         console.error(2222, error);
@@ -97,7 +99,6 @@ if (window.location.pathname === '/main.html') {
       });
     }
 
-  let mensagensAdicionadas = [];
   function buscarMensagens() {
       setInterval(() => {
         axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
@@ -110,14 +111,7 @@ if (window.location.pathname === '/main.html') {
                 <div class="msg-text" data-test="message">${response.data[i].from}: ${response.data[i].text}</div> 
               </li>`
             }
-            // response.data.forEach(mensagem => {
-            //   const mensagemExistente = mensagensAdicionadas.find(m => m.text === mensagem.text && m.from === mensagem.from);
-            //   if (!mensagemExistente) {
-            //   lista.innerHTML += `<li class="msg-message"> <div class="msg-hora" data-test="message">(${mensagem.time})</div> <div class="msg-text" data-test="message">${mensagem.from}: ${mensagem.text}</div> </li>` ;
-            //   mensagensAdicionadas.push(mensagem);
-            //   }
-            //   });
-              console.log(response.data);
+              // console.log(response.data);
               })
           .catch(error => {
             console.error(999,error);
@@ -135,7 +129,7 @@ if (window.location.pathname === '/main.html') {
       })
       .catch(error => {
         console.error(error);
-        
+
       });
     }, 5000);
   }
