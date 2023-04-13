@@ -61,6 +61,7 @@ body{
     height: 53px;
     left: 22px;
     top: 16px;
+    cursor: pointer;
 }
 .person{
     position: absolute;

@@ -12,6 +12,10 @@ const hora = agora.getHours();
 const minuto = agora.getMinutes();
 const segundo = agora.getSeconds();
 
+function retornaAccess(){
+  window.location.replace('index.html');
+}
+
 window.addEventListener('load', function() {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
