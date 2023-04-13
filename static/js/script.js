@@ -46,45 +46,66 @@ if (window.location.pathname === '/main.html') {
   const input = document.querySelector(".msg-input input");
   input.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
-      newPost(3);
+      const msg = input.value;
+      dados = {
+        from: newUser,
+        to: "Todos",
+        text: msg,
+        type: 'message',
+    }
+    enviarMensagem(dados);
+    document.querySelector('.msg-input input').value = ''
     }
   });
 
-  function newPost(type){ // dados = {from:, to:, text:,}
-      let classe;
-      let frase;
-      let quem;
-      let dados = {};
-      
-      const msg = input.value;
-      
-      if (type == 1){
-          classe = 'msg-access';
-          frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
+  function newPost(){
+    const msg = input.value;
+      dados = {
+        from: newUser,
+        to: "Todos",
+        text: msg,
+        type: 'message',
+    }
+    enviarMensagem(dados);
+    document.querySelector('.msg-input input').value = ''
+    }
+  }
 
-      } else if (type == 2){
-          classe = 'msg-private';
-          frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
-          dados = {
-              from: newUser,
-              to: "Levy",
-              text: frase,
-              type: 'private-message',
-              time: `${hora}:${minuto}:${segundo}`
-          }
-          enviarMensagem(dados);
-      } else{
-          classe = 'msg-message';
-          frase = `<div class="msg-text" data-test="message">${newUser} para Todos: ${msg}</div>`;
-          dados = {
-              from: newUser,
-              to: "Todos",
-              text: msg,
-              type: 'message',
-          }
-          enviarMensagem(dados);
-          document.querySelector('.msg-input input').value = ''
-      }
+  // function newPost(type){ // dados = {from:, to:, text:,}
+  //     let classe;
+  //     let frase;
+  //     let quem;
+  //     let dados = {};
+      
+  //     const msg = input.value;
+      
+  //     if (type == 1){
+  //         classe = 'msg-access';
+  //         frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
+
+  //     } else if (type == 2){
+  //         classe = 'msg-private';
+  //         frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
+  //         dados = {
+  //             from: newUser,
+  //             to: "Levy",
+  //             text: frase,
+  //             type: 'private-message',
+  //             time: `${hora}:${minuto}:${segundo}`
+  //         }
+  //         enviarMensagem(dados);
+  //     } else{
+  //         classe = 'msg-message';
+  //         frase = `<div class="msg-text" data-test="message">${newUser} para Todos: ${msg}</div>`;
+  //         dados = {
+  //             from: newUser,
+  //             to: "Todos",
+  //             text: msg,
+  //             type: 'message',
+  //         }
+  //         enviarMensagem(dados);
+  //         document.querySelector('.msg-input input').value = ''
+  //     }
       
       // const lista = document.querySelector('.msg-list');
       // const html = `
@@ -94,7 +115,7 @@ if (window.location.pathname === '/main.html') {
       // </li>
       // `;
       // lista.innerHTML += html
-  };
+  // };
 
 
   function enviarMensagem(dados) {
@@ -140,7 +161,7 @@ if (window.location.pathname === '/main.html') {
               }
               
             }
-              console.log(response.data);
+              // console.log(response.data);
               })
           .catch(error => {
             console.error(999,error);
@@ -193,4 +214,4 @@ if (window.location.pathname === '/main.html') {
     }
   });
 
-};
+// };
