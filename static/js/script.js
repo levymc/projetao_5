@@ -93,6 +93,7 @@ if (window.location.pathname === '/main.html') {
       })
       .catch(error => {
         console.error(2222, error);
+        alert("Ocorreu um erro ao enviar a mensagem, tente novamente mais tarde.");
       });
     }
 
@@ -120,6 +121,7 @@ if (window.location.pathname === '/main.html') {
               })
           .catch(error => {
             console.error(999,error);
+            alert("Ocorreu um erro ao buscar mensagens, recarregue a página ou tente novamente mais tarde.");
           });
       }, 3000);
   }  
@@ -133,6 +135,7 @@ if (window.location.pathname === '/main.html') {
       })
       .catch(error => {
         console.error(error);
+        
       });
     }, 5000);
   }

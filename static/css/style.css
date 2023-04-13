@@ -124,6 +124,9 @@ body{
     height: 100%;
 
   }
+.msg-text{
+    user-select:text;
+}
 .aviao{
     position: absolute;
     right: 1em;
