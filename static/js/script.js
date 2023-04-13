@@ -96,6 +96,7 @@ if (window.location.pathname === '/main.html') {
       .catch(error => {
         console.error(2222, error);
         alert("Ocorreu um erro ao enviar a mensagem, tente novamente mais tarde.");
+        retornaAccess();
       });
     }
 
