@@ -67,6 +67,13 @@ body{
     position: absolute;
     right: 2em;
 }
+.checkStatus{
+    position: absolute;
+    top: 40px;
+    left: 10em;
+    font-size: 12px;
+    font-weight: bold;
+}
 .person img{
     cursor: pointer;
 }

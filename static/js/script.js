@@ -26,13 +26,23 @@ window.addEventListener('load', function() {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
       console.log("ROberval pererei")
-      newPost(1);
+      // newPost(1);
     }
   }
 });
 
 
 if (window.location.pathname === '/main.html') {
+
+  const checkbox = document.querySelector('input[name="checkStatus"]');
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      this.value = '1';
+    } else {
+      this.value = '';
+    }
+  });
+
   const input = document.querySelector(".msg-input input");
   input.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
@@ -112,12 +122,14 @@ if (window.location.pathname === '/main.html') {
                   <div class="msg-text" data-test="message">${response.data[i].from} para Todos: ${response.data[i].text}</div> 
                 </li>`
               }else if (response.data[i].type === "status"){
-                lista.innerHTML +=`
-                <li class="msg-access"> 
-                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
-                  <div class="msg-text" data-test="message">${response.data[i].from} entra na sala...</div> 
-                </li>
-                `
+                if (document.querySelector('input[name="checkStatus"]').value == '1'){
+                  lista.innerHTML +=`
+                  <li class="msg-access"> 
+                    <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
+                    <div class="msg-text" data-test="message">${response.data[i].from} entra na sala...</div> 
+                  </li>
+                  `
+                }
               }else{
                 lista.innerHTML +=`
                 <li class="msg-private"> 
