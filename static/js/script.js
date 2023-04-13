@@ -86,18 +86,27 @@ function enviarMensagem(dados) {
       console.error(2222, error);
     });
   }
+
 let mensagensAdicionadas = [];
 function buscarMensagens() {
     setInterval(() => {
       axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
           const lista = document.querySelector('.msg-list');
-          response.data.forEach(mensagem => {
-            const mensagemExistente = mensagensAdicionadas.find(m => m.text === mensagem.text && m.from === mensagem.from);
-            if (!mensagemExistente) {
-            lista.innerHTML += `<li class="msg-message"> <div class="msg-hora" data-test="message">(${mensagem.time})</div> <div class="msg-text" data-test="message">${mensagem.from}: ${mensagem.text}</div> </li>` ;
-            mensagensAdicionadas.push(mensagem);
-            }
-            });
+          lista.innerHTML = ''
+          for (i in response.data){
+            lista.innerHTML +=`
+            <li class="msg-message"> 
+              <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
+              <div class="msg-text" data-test="message">${response.data[i].from}: ${response.data[i].text}</div> 
+            </li>`
+          }
+          // response.data.forEach(mensagem => {
+          //   const mensagemExistente = mensagensAdicionadas.find(m => m.text === mensagem.text && m.from === mensagem.from);
+          //   if (!mensagemExistente) {
+          //   lista.innerHTML += `<li class="msg-message"> <div class="msg-hora" data-test="message">(${mensagem.time})</div> <div class="msg-text" data-test="message">${mensagem.from}: ${mensagem.text}</div> </li>` ;
+          //   mensagensAdicionadas.push(mensagem);
+          //   }
+          //   });
             console.log(response.data);
             })
         .catch(error => {
