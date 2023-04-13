@@ -171,7 +171,15 @@ if (window.location.pathname === '/main.html') {
   }  
 
   function buscaParticipantes(){
-    
+    setInterval(() => {
+      axios.get('https://mock-api.driven.com.br/api/vm/uol/participants').then(response => {
+        console.log(response.data);
+        const participantes = response.data;
+        return participantes
+      }).catch(error => {
+        console.log(error);
+      })
+    }, 3000)
   }
     
   function conexao(){
@@ -188,6 +196,7 @@ if (window.location.pathname === '/main.html') {
     }, 5000);
   }
 
+  buscaParticipantes()
   conexao();
   buscarMensagens();
 
