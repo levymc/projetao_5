@@ -40,10 +40,10 @@ function newPost(type){
     if (type == 1){
         classe = 'msg-access';
         frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
-        dados = {
-            name: newUser,
-          };
-          entraSala(dados);
+        // dados = {
+        //     name: newUser,
+        //   };
+        //   entraSala(dados);
     } else if (type == 2){
         classe = 'msg-private';
         frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
@@ -77,14 +77,6 @@ function newPost(type){
     lista.innerHTML += html
 };
 
-function entraSala(dados){
-    axios.post("https://mock-api.driven.com.br/api/vm/uol/participants", dados).then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(2222, error);
-      });
-}
 
 function enviarMensagem(dados) {
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
