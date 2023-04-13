@@ -25,7 +25,8 @@ window.addEventListener('load', function() {
   if (window.location.pathname === '/main.html') {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
-        newPost(1);
+      console.log("ROberval pererei")
+      newPost(1);
     }
   }
 });
@@ -50,26 +51,24 @@ if (window.location.pathname === '/main.html') {
       if (type == 1){
           classe = 'msg-access';
           frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
-          // dados = {
-          //     name: newUser,
-          //   };
-          //   entraSala(dados);
+
       } else if (type == 2){
           classe = 'msg-private';
           frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
           dados = {
               from: newUser,
-              to: "Nome do Destinatario",
+              to: "Levy",
               text: frase,
               type: 'private-message',
               time: `${hora}:${minuto}:${segundo}`
           }
+          enviarMensagem(dados);
       } else{
           classe = 'msg-message';
           frase = `<div class="msg-text" data-test="message">${newUser} para Todos: ${msg}</div>`;
           dados = {
               from: newUser,
-              to: "Nome do Destinatario",
+              to: "Todos",
               text: msg,
               type: 'message',
           }
