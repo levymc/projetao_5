@@ -90,24 +90,24 @@ if (window.location.pathname === '/main.html') {
             for (i in response.data){
               if (response.data[i].type === "message"){
                 lista.innerHTML +=`
-                <li class="msg-message"> 
-                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
-                  <div class="msg-text" data-test="message">${response.data[i].from} para Todos: ${response.data[i].text}</div> 
+                <li class="msg-message" data-test="message"> 
+                  <div class="msg-hora">(${response.data[i].time})</div> 
+                  <div class="msg-text">${response.data[i].from} para Todos: ${response.data[i].text}</div> 
                 </li>`
               }else if (response.data[i].type === "status"){
                 if (document.querySelector('input[name="checkStatus"]').value == '1'){
                   lista.innerHTML +=`
-                  <li class="msg-access"> 
-                    <div class="msg-hora" data-test="message">(${response.data[i].time})</div> 
-                    <div class="msg-text" data-test="message">${response.data[i].from} entra na sala...</div> 
+                  <li class="msg-access" data-test="message"> 
+                    <div class="msg-hora" >(${response.data[i].time})</div> 
+                    <div class="msg-text">${response.data[i].from} entra na sala...</div> 
                   </li>
                   `
                 }
               }else{
                 lista.innerHTML +=`
-                <li class="msg-private"> 
-                  <div class="msg-hora" data-test="message">(${response.data[i].time})</div>    
-                  <div class="msg-text" data-test="message">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}}</div> 
+                <li class="msg-private" data-test="message"> 
+                  <div class="msg-hora">(${response.data[i].time})</div>    
+                  <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}}</div> 
                 </li>
                 `
               }
