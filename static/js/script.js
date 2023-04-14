@@ -166,6 +166,7 @@ if (window.location.pathname === '/main.html') {
           .catch(error => {
             console.error(999,error);
             alert("Ocorreu um erro ao buscar mensagens, recarregue a página ou tente novamente mais tarde.");
+            window.location.reload();
           });
       }, 3000);
   }  
