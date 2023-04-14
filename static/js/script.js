@@ -69,54 +69,6 @@ if (window.location.pathname === '/main.html') {
     enviarMensagem(dados);
     document.querySelector('.msg-input input').value = ''
     }
-  
-
-  // function newPost(type){ // dados = {from:, to:, text:,}
-  //     let classe;
-  //     let frase;
-  //     let quem;
-  //     let dados = {};
-      
-  //     const msg = input.value;
-      
-  //     if (type == 1){
-  //         classe = 'msg-access';
-  //         frase = `<div class="msg-text" data-test="message">${newUser} entra na sala...</div>`;
-
-  //     } else if (type == 2){
-  //         classe = 'msg-private';
-  //         frase = `<div class="msg-text" data-test="message">${newUser} reservadamente para Maria: ${msg}</div>`;
-  //         dados = {
-  //             from: newUser,
-  //             to: "Levy",
-  //             text: frase,
-  //             type: 'private-message',
-  //             time: `${hora}:${minuto}:${segundo}`
-  //         }
-  //         enviarMensagem(dados);
-  //     } else{
-  //         classe = 'msg-message';
-  //         frase = `<div class="msg-text" data-test="message">${newUser} para Todos: ${msg}</div>`;
-  //         dados = {
-  //             from: newUser,
-  //             to: "Todos",
-  //             text: msg,
-  //             type: 'message',
-  //         }
-  //         enviarMensagem(dados);
-  //         document.querySelector('.msg-input input').value = ''
-  //     }
-      
-      // const lista = document.querySelector('.msg-list');
-      // const html = `
-      // <li class="${classe}">
-      //     <div class="msg-hora" data-test="message">(${hora}:${minuto}:${segundo})</div>
-      //     ${frase}
-      // </li>
-      // `;
-      // lista.innerHTML += html
-  // };
-
 
   function enviarMensagem(dados) {
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
