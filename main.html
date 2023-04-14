@@ -22,25 +22,18 @@
             Escolha um contato<br />
             para enviar mensagem:
           </div>
-          <div class="contato"><img src="./static/img/person.svg" alt="person"> Todos</div>
-          <div class="contato"><img src="./static/img/contato.svg" alt="contato"> Maria</div>
-          <div class="contato"><img src="./static/img/contato.svg" alt="contato"> Carlin Barbosa</div>
+          <div class="lista-contatos">
+            '<div class="contato"><img src="./static/img/person.svg" alt="person"> Todos</div>'
+          </div>
+          
         </div>
-          <ul class="msg-list">
-              <!-- <li class="msg-access">
-                <div class="msg-hora">(09:21:45)</div>
-                <div class="msg-text">João  entra na sala...</div>
-              </li>
-              <li class="msg-message">
-                <div class="msg-hora">(09:22:28)</div>
-                <div class="msg-text">João para Todos:  Bom dia</div>
-              </li>
-              <li class="msg-private">
-                <div class="msg-hora">(09:22:38)</div>
-                <div class="msg-text">João reservadamente para Maria: Oi gatinha quer tc?</div>
-              </li> -->
-            </ul>
+          <ul class="msg-list"></ul>
+            <!-- <select name="selectParticipants">
+              <option value="valor2" selected disabled>Participantes</option>
+              <option value="valor3">Valor 3</option>
+            </select> -->
       </div>
+      
       <div class="footer grid-item">
           <div class="msg-input"><input data-test="input-message" type="text" placeholder="Escreva aqui"></div>
           <div class="aviao"><ion-icon data-test="send-message" onclick="newPost(3)" name="paper-plane-outline"></ion-icon></div>

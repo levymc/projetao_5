@@ -69,7 +69,7 @@ if (window.location.pathname === '/main.html') {
     enviarMensagem(dados);
     document.querySelector('.msg-input input').value = ''
     }
-  }
+  
 
   // function newPost(type){ // dados = {from:, to:, text:,}
   //     let classe;
@@ -119,16 +119,16 @@ if (window.location.pathname === '/main.html') {
 
 
   function enviarMensagem(dados) {
-      axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
-        console.log(response.data);
-        buscarMensagens();
-      })
-      .catch(error => {
-        console.error(2222, error);
-        alert("Ocorreu um erro ao enviar a mensagem, tente novamente mais tarde.");
-        retornaAccess();
-      });
-    }
+    axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
+      console.log(response.data);
+      buscarMensagens();
+    })
+    .catch(error => {
+      console.error(2222, error);
+      alert("Ocorreu um erro ao enviar a mensagem, tente novamente mais tarde.");
+      retornaAccess();
+    });
+  }
 
   function buscarMensagens() {
       setInterval(() => {
@@ -170,17 +170,42 @@ if (window.location.pathname === '/main.html') {
       }, 3000);
   }  
 
-  function buscaParticipantes(){
+  function buscaParticipantes() {
+    let nomesParticipantes = ["Todos"]; // array para armazenar os nomes dos participantes
     setInterval(() => {
-      axios.get('https://mock-api.driven.com.br/api/vm/uol/participants').then(response => {
-        console.log(response.data);
-        const participantes = response.data;
-        return participantes
-      }).catch(error => {
-        console.log(error);
-      })
-    }, 3000)
+      const div = document.querySelector(".lista-contatos");
+      // div.innerHTML = '<div class="contato"><img src="./static/img/person.svg" alt="person"> Todos</div>';
+      axios
+        .get("https://mock-api.driven.com.br/api/vm/uol/participants")
+        .then((response) => {
+          console.log(response.data);
+          const participantes = response.data;
+          participantes.forEach((participante) => {
+            const nomeParticipante = participante.name;
+            // verifica se o nome do participante já está na lista
+            if (!nomesParticipantes.includes(nomeParticipante)) {
+              const divParticipante = `<div class="contato"><img src="./static/img/contato.svg" alt="contato"> ${nomeParticipante}</div>`;
+              div.innerHTML += divParticipante;
+              nomesParticipantes.push(nomeParticipante); // adiciona o nome do participante ao array
+            }
+          });
+          // itera sobre todos os elementos da lista e verifica se o nome do contato está presente
+          const contatos = div.querySelectorAll(".contato");
+          contatos.forEach((contato) => {
+            const nomeContato = contato.innerText.split(" ")[1]; // extrai o nome do contato do texto
+            if (nomeContato !== "Todos" && !nomesParticipantes.includes(nomeContato)) {
+              contato.remove(); // remove o contato da lista
+            }
+          });
+          return participantes;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 3000);
   }
+  
+  
     
   function conexao(){
     setInterval(() => {
@@ -191,7 +216,8 @@ if (window.location.pathname === '/main.html') {
       })
       .catch(error => {
         console.error(error);
-
+        alert("Você foi desconectado");
+        retornaAccess();
       });
     }, 5000);
   }
@@ -223,4 +249,4 @@ if (window.location.pathname === '/main.html') {
     }
   });
 
-// };
+};

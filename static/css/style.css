@@ -140,12 +140,25 @@ body{
     bottom: 1.4em;
     z-index: 1000;
 }
+.selectParticipants{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 2em;
+    /* transform: translateX(100%); */
+}
 .aviao ion-icon{
     font-size: 25px;
     color: black;
     cursor: pointer;
 }
-  
+
+.lista-contatos{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 /* GRID */
 grid-container {
