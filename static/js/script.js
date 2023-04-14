@@ -127,6 +127,7 @@ if (window.location.pathname === '/main.html') {
     let nomesParticipantes = ["Todos"]; // array para armazenar os nomes dos participantes
     setInterval(() => {
       const div = document.querySelector(".lista-contatos");
+      div.innerHTML  = '<div class="contato" data-test="all"><img src="./static/img/person.svg" id="Todos" alt="person"> Todos</div>'
       // div.innerHTML = '<div class="contato"><img src="./static/img/person.svg" alt="person"> Todos</div>';
       axios
         .get("https://mock-api.driven.com.br/api/vm/uol/participants")
@@ -160,7 +161,7 @@ if (window.location.pathname === '/main.html') {
         .catch((error) => {
           console.log(error);
         });
-    }, 3000);
+    }, 10000);
   }
   
   
