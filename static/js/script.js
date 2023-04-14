@@ -137,7 +137,7 @@ if (window.location.pathname === '/main.html') {
             const nomeParticipante = participante.name;
             // verifica se o nome do participante já está na lista
             if (!nomesParticipantes.includes(nomeParticipante)) {
-              const divParticipante = `<div class="contato" id="${nomeParticipante}" ><img src="./static/img/contato.svg" alt="contato"> ${nomeParticipante}</div>`;
+              const divParticipante = `<div class="contato" id="${nomeParticipante}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${nomeParticipante}</div>`;
               div.innerHTML += divParticipante;
               nomesParticipantes.push(nomeParticipante); // adiciona o nome do participante ao array
               const divContato = document.querySelector(`#${nomeParticipante}`);
