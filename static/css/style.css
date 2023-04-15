@@ -162,16 +162,20 @@ body{
     gap: 1.25em;
 }
 .visibilidade{
+    margin-top: 2em;
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.25em;
     justify-content: space-between;
     margin-left: 2em;
 }
 .visibilidade-title{
     margin-left: 0 !important;
     text-align: center;
+}
+.publico img, .reservado img{
+    margin-right: 0.5em;
 }
 
 /* GRID */
