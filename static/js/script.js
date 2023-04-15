@@ -124,38 +124,43 @@ if (window.location.pathname === '/main.html') {
   }  
 
   function buscaParticipantes() {
-    let nomesParticipantes = []; // array para armazenar os nomes dos participantes
+    
     setInterval(() => {
+      let nomesParticipantes = ["Todos"]; // array para armazenar os nomes dos participantes
       const div = document.querySelector(".lista-contatos");
-      div.innerHTML = '<div class="contato" onclick="nome(Todos)" data-test="all"><img src="./static/img/person.svg" id="Todos" alt="person"> Todos</div>';
+      div.innerHTML = ''; 
+      div.insertAdjacentHTML("beforeend", `<div class="contato" onclick="nome(\'Todos\')" data-participante="Todos" data-test="all"><img src="./static/img/person.svg" id="Todos"  alt="person"> Todos</div>`);
       axios.get("https://mock-api.driven.com.br/api/vm/uol/participants").then((response) => {
-          console.log(response.data);
-          const participantes = response.data;
-          participantes.forEach((participante) => {
-            const divParticipante = `<div class="contato" id="${participante.name}" onclick="nome('${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
-            div.insertAdjacentHTML("beforeend", divParticipante);
-            nomesParticipantes.push(participante.name); // adiciona o nome do participante ao array
-            const divContato = document.querySelector(`#${participante.name}`);
-            // adicionando o evento de clique
-            // divContato.addEventListener('click', () => {
-              // console.log(participante.name);
-            // });
-          });
-          // itera sobre todos os elementos da lista e verifica se o nome do contato está presente
-          const contatos = div.querySelectorAll(".contato");
-          contatos.forEach((contato) => {
-            const nomeContato = contato.getAttribute("data-participante");
-            if (nomeContato !== "Todos" && !nomesParticipantes.includes(nomeContato)) {
-              contato.remove(); // remove o contato da lista
-            }
-          });
-          return participantes;
-        })
-        .catch((error) => {
-          console.log(error);
+        console.log(response.data);
+        const participantes = response.data;
+        participantes.forEach((participante) => {
+          const divParticipante = `<div class="contato" id="${participante.name}" onclick="nome('${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
+          div.insertAdjacentHTML("beforeend", divParticipante);
+          nomesParticipantes.push(participante.name);
+          // const divContato = document.querySelector(`#${participante.name}`);
+          // adicionando o evento de clique
+          // divContato.addEventListener('click', () => {
+            // console.log(participante.name);
+          // });
+          // console.log(nomesParticipantes)
         });
+        // itera sobre todos os elementos da lista e verifica se o nome do contato está presente
+        const contatos = div.querySelectorAll(".contato");
+        contatos.forEach((contato) => {
+          const nomeContato = contato.getAttribute("data-participante");
+          if (nomeContato !== "Todos" && !nomesParticipantes.includes(nomeContato)) {
+            contato.remove(); // remove o contato da lista
+          }
+        });
+        return participantes;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }, 10000);
   }
+  
+  
   
   function nome(participant){
     console.log(participant);
