@@ -161,13 +161,28 @@ if (window.location.pathname === '/main.html') {
   }
   
   
-  
-  function nome(participant){
-    console.log(participant);
+  function nome(participant) {
+    let divParticipante = document.querySelector(`#${participant}`);
+    const checkmarkIcon = divParticipante.querySelector('[name="checkmark-outline"]');
+    if (checkmarkIcon && checkmarkIcon.parentElement === divParticipante) {
+      checkmarkIcon.remove();
+    } else {
+      // Desmarca o participante anteriormente selecionado, se houver
+      const previouslySelectedParticipant = document.querySelector('.contato ion-icon');
+      if (previouslySelectedParticipant) {
+        previouslySelectedParticipant.remove();
+      }
+      divParticipante.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
+    }
     let forWho = document.querySelector(".forWho");
-    forWho.innerHTML = '';
-    forWho.innerHTML = participant;
+    if (forWho.innerHTML === participant) {
+      forWho.innerHTML = '';
+    } else {
+      forWho.innerHTML = participant;
+    }
   }
+  
+  
   
   
   
