@@ -16,11 +16,6 @@ function retornaAccess(){
   window.location.replace('index.html');
 }
 
-// window.onload = function() {
-//   // Seu código aqui
-// }
-
-
 window.addEventListener('load', function() {
   if (window.location.pathname === '/main.html') {
     newUser = localStorage.getItem('newUser');
@@ -30,9 +25,7 @@ window.addEventListener('load', function() {
   }
 });
 
-
 if (window.location.pathname === '/main.html') {
-
   const checkbox = document.querySelector('input[name="checkStatus"]');
   checkbox.addEventListener('change', function() {
     if (this.checked) {
@@ -124,12 +117,11 @@ if (window.location.pathname === '/main.html') {
 
   function buscaParticipantes() {
     let contador = 0;
-    
     setInterval(() => {
       let nomesParticipantes = ["Todos"]; // array para armazenar os nomes dos participantes
       const div = document.querySelector(".lista-contatos");
       div.innerHTML = ''; 
-      div.insertAdjacentHTML("beforeend", `<div class="contato" onclick="nome(\'Todos\')" data-participante="Todos" data-test="all"><img src="./static/img/person.svg" id="Todos"  alt="person"> Todos</div>`);
+      div.insertAdjacentHTML("beforeend", `<div class="contato" id="pessoa" onclick="nome(\'pessoa\',\'Todos\')" data-participante="Todos" data-test="all"><img src="./static/img/person.svg" id="Todos"  alt="person"> Todos</div>`);
       axios.get("https://mock-api.driven.com.br/api/vm/uol/participants").then((response) => {
         console.log(response.data);
         const participantes = response.data;
@@ -155,9 +147,34 @@ if (window.location.pathname === '/main.html') {
     }, 10000);
   }
   
+  let paraQuem = true;
+
+  function toggleCadeado(cadeado) {
+    paraQuem = !paraQuem;
+    const checkmarkIcon = cadeado.querySelector('[name="checkmark-outline"]');
+    if (checkmarkIcon && checkmarkIcon.parentElement === cadeado) {
+      checkmarkIcon.remove();
+    } else {
+      // Desmarca o participante anteriormente selecionado, se houver
+      const previouslySelectedCadeado = document.querySelector('.cadeado ion-icon');
+      if (previouslySelectedCadeado) {
+        previouslySelectedCadeado.remove();
+      }
+      cadeado.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
+    }
+  }
+
+  const publicoCadeado = document.querySelector('.cadeado.publico');
+  toggleCadeado(publicoCadeado); // adiciona o ícone na div .publica
+  publicoCadeado.addEventListener('click', () => toggleCadeado(publicoCadeado));
   
+  const reservadoCadeado = document.querySelector('.cadeado.reservado');
+  reservadoCadeado.addEventListener('click', () => toggleCadeado(reservadoCadeado));  
+
+
   function nome(id, participant) {
-    let divParticipante = document.querySelector(`${'#'+id}`);
+    if (id!="pessoa"){
+      let divParticipante = document.querySelector(`${'#'+id}`);
     console.log(divParticipante)
     const checkmarkIcon = divParticipante.querySelector('[name="checkmark-outline"]');
     if (checkmarkIcon && checkmarkIcon.parentElement === divParticipante) {
@@ -171,35 +188,26 @@ if (window.location.pathname === '/main.html') {
       divParticipante.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
     }
     let forWho = document.querySelector(".forWho");
-    if (forWho.innerHTML === "Enviando para " + participant + " (reservadamente)") {
-      forWho.innerHTML = '';
-    } else {
-      forWho.innerHTML = "Enviando para " + participant + " (reservadamente)";
-    }
-  }
-  
-  function toggleCadeado(cadeado) {
-    const checkmarkIcon = cadeado.querySelector('[name="checkmark-outline"]');
-    if (checkmarkIcon && checkmarkIcon.parentElement === cadeado) {
-      checkmarkIcon.remove();
-    } else {
-      // Desmarca o participante anteriormente selecionado, se houver
-      const previouslySelectedCadeado = document.querySelector('.cadeado ion-icon');
-      if (previouslySelectedCadeado) {
-        previouslySelectedCadeado.remove();
+    if (!paraQuem){
+      if (forWho.innerHTML === "Enviando para " + participant) {
+        forWho.innerHTML = '';
+      } else {
+        forWho.innerHTML = "Enviando para " + participant;
       }
-      cadeado.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
+    }else{
+      if (forWho.innerHTML === "Enviando para " + participant + " (reservadamente)") {
+        forWho.innerHTML = '';
+      } else {
+        forWho.innerHTML = "Enviando para " + participant + " (reservadamente)";
+      }
+    }
+    }else{
+      let forWho = document.querySelector(".forWho");
+      forWho.innerHTML = '';
     }
   }
   
-  const publicoCadeado = document.querySelector('.cadeado.publico');
-  toggleCadeado(publicoCadeado); // adiciona o ícone na div .publica
-  publicoCadeado.addEventListener('click', () => toggleCadeado(publicoCadeado));
   
-  const reservadoCadeado = document.querySelector('.cadeado.reservado');
-  reservadoCadeado.addEventListener('click', () => toggleCadeado(reservadoCadeado));  
-  
-
   function conexao(){
     setInterval(() => {
       axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
