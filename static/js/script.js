@@ -164,6 +164,9 @@ if (window.location.pathname === '/main.html') {
   
   function nome(participant){
     console.log(participant);
+    let forWho = document.querySelector(".forWho");
+    forWho.innerHTML = '';
+    forWho.innerHTML = participant;
   }
   
   
