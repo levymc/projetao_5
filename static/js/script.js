@@ -11,6 +11,9 @@ const agora = new Date();
 const hora = agora.getHours();
 const minuto = agora.getMinutes();
 const segundo = agora.getSeconds();
+let quem = "Todos";
+let tipo = "message";
+let paraQuem = true;
 
 function retornaAccess(){
   window.location.replace('index.html');
@@ -41,9 +44,9 @@ if (window.location.pathname === '/main.html') {
       const msg = input.value;
       dados = {
         from: newUser,
-        to: "Todos",
+        to: quem,
         text: msg,
-        type: 'message',
+        type: tipo,
     }
     enviarMensagem(dados);
     document.querySelector('.msg-input input').value = ''
@@ -54,9 +57,9 @@ if (window.location.pathname === '/main.html') {
     const msg = input.value;
       dados = {
         from: newUser,
-        to: "Todos",
+        to: quem,
         text: msg,
-        type: 'message',
+        type: tipo,
     }
     enviarMensagem(dados);
     document.querySelector('.msg-input input').value = ''
@@ -64,7 +67,6 @@ if (window.location.pathname === '/main.html') {
 
   function enviarMensagem(dados) {
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
-      console.log(response.data);
       buscarMensagens();
     })
     .catch(error => {
@@ -78,6 +80,7 @@ if (window.location.pathname === '/main.html') {
       setInterval(() => {
         axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
             const lista = document.querySelector('.msg-list');
+            console.log(response.data)
             lista.innerHTML = ''
             for (i in response.data){
               if (response.data[i].type === "message"){
@@ -96,16 +99,25 @@ if (window.location.pathname === '/main.html') {
                   `
                 }
               }else{
-                lista.innerHTML +=`
+                if(!paraQuem){
+                    lista.innerHTML +=`
+                  <li class="msg-private" data-test="message"> 
+                    <div class="msg-hora">(${response.data[i].time})</div>    
+                    <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}</div> 
+                  </li>
+                  `
+                }else{
+                  lista.innerHTML +=`
                 <li class="msg-private" data-test="message"> 
                   <div class="msg-hora">(${response.data[i].time})</div>    
-                  <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}}</div> 
+                  <div class="msg-text">${response.data[i].from} reservadamente para ${response.data[i].to}: ${response.data[i].text}</div> 
                 </li>
                 `
+                }
+                
               }
               
             }
-              // console.log(response.data);
               })
           .catch(error => {
             console.error(999,error);
@@ -123,7 +135,6 @@ if (window.location.pathname === '/main.html') {
       div.innerHTML = ''; 
       div.insertAdjacentHTML("beforeend", `<div class="contato" id="pessoa" onclick="nome(\'pessoa\',\'Todos\')" data-participante="Todos" data-test="all"><img src="./static/img/person.svg" id="Todos"  alt="person"> Todos</div>`);
       axios.get("https://mock-api.driven.com.br/api/vm/uol/participants").then((response) => {
-        console.log(response.data);
         const participantes = response.data;
         participantes.forEach((participante) => {
           contador++
@@ -147,7 +158,6 @@ if (window.location.pathname === '/main.html') {
     }, 10000);
   }
   
-  let paraQuem = true;
 
   function toggleCadeado(cadeado) {
     paraQuem = !paraQuem;
@@ -173,9 +183,9 @@ if (window.location.pathname === '/main.html') {
 
 
   function nome(id, participant) {
+    quem = participant
     if (id!="pessoa"){
       let divParticipante = document.querySelector(`${'#'+id}`);
-    console.log(divParticipante)
     const checkmarkIcon = divParticipante.querySelector('[name="checkmark-outline"]');
     if (checkmarkIcon && checkmarkIcon.parentElement === divParticipante) {
       checkmarkIcon.remove();
@@ -189,12 +199,14 @@ if (window.location.pathname === '/main.html') {
     }
     let forWho = document.querySelector(".forWho");
     if (!paraQuem){
+      tipo = 'message';
       if (forWho.innerHTML === "Enviando para " + participant) {
         forWho.innerHTML = '';
       } else {
         forWho.innerHTML = "Enviando para " + participant;
       }
     }else{
+      tipo = 'private_message';
       if (forWho.innerHTML === "Enviando para " + participant + " (reservadamente)") {
         forWho.innerHTML = '';
       } else {
