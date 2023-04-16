@@ -138,12 +138,6 @@ if (window.location.pathname === '/main.html') {
           const divParticipante = `<div class="contato" id="${"pessoa"+contador}" onclick="nome('${"pessoa"+contador}','${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
           div.insertAdjacentHTML("beforeend", divParticipante);
           nomesParticipantes.push(participante.name);
-          // const divContato = document.querySelector(`#${participante.name}`);
-          // adicionando o evento de clique
-          // divContato.addEventListener('click', () => {
-            // console.log(participante.name);
-          // });
-          // console.log(nomesParticipantes)
         });
         // itera sobre todos os elementos da lista e verifica se o nome do contato está presente
         const contatos = div.querySelectorAll(".contato");
