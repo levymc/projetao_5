@@ -25,7 +25,6 @@ window.addEventListener('load', function() {
   if (window.location.pathname === '/main.html') {
     newUser = localStorage.getItem('newUser');
     if (newUser) {
-      console.log("ROberval pererei")
       // newPost(1);
     }
   }
@@ -175,18 +174,35 @@ if (window.location.pathname === '/main.html') {
       divParticipante.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
     }
     let forWho = document.querySelector(".forWho");
-    if (forWho.innerHTML === participant) {
+    if (forWho.innerHTML === "Enviando para " + participant + " (reservadamente)") {
       forWho.innerHTML = '';
     } else {
-      forWho.innerHTML = participant;
+      forWho.innerHTML = "Enviando para " + participant + " (reservadamente)";
     }
   }
   
+  function toggleCadeado(cadeado) {
+    const checkmarkIcon = cadeado.querySelector('[name="checkmark-outline"]');
+    if (checkmarkIcon && checkmarkIcon.parentElement === cadeado) {
+      checkmarkIcon.remove();
+    } else {
+      // Desmarca o participante anteriormente selecionado, se houver
+      const previouslySelectedCadeado = document.querySelector('.cadeado ion-icon');
+      if (previouslySelectedCadeado) {
+        previouslySelectedCadeado.remove();
+      }
+      cadeado.insertAdjacentHTML('beforeend', '<ion-icon name="checkmark-outline"></ion-icon>');
+    }
+  }
   
+  const publicoCadeado = document.querySelector('.cadeado.publico');
+  toggleCadeado(publicoCadeado); // adiciona o ícone na div .publica
+  publicoCadeado.addEventListener('click', () => toggleCadeado(publicoCadeado));
   
+  const reservadoCadeado = document.querySelector('.cadeado.reservado');
+  reservadoCadeado.addEventListener('click', () => toggleCadeado(reservadoCadeado));  
   
-  
-    
+
   function conexao(){
     setInterval(() => {
       axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
@@ -215,7 +231,6 @@ if (window.location.pathname === '/main.html') {
     sidebar.style.right = '0';
     overlay.style.display = 'block';
   }
-
 
 
   // Para esconder a sidebar novamente quando o usuário clicar em outro lugar da página

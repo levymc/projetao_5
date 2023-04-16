@@ -129,7 +129,7 @@ body{
     width: 100%;
     box-sizing: border-box;
     height: 100%;
-
+    padding-left: 1em;
   }
 .msg-text{
     user-select:text;
@@ -143,8 +143,13 @@ body{
 .forWho{
     position: absolute;
     left: 1em;
-    bottom: 1em;
+    bottom: 0.4em;
     z-index: 1000;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    color: rgba(128, 128, 128, 0.66);
 }
 .selectParticipants{
     position: fixed;
@@ -180,6 +185,15 @@ body{
     margin-left: 0 !important;
     text-align: center;
 }
+.cadeado{
+    cursor: pointer;
+}
+ion-icon[name="checkmark-outline"] {
+    position: absolute;
+    right: 2em;
+    color: rgb(86, 139, 6);
+  }
+  
 .publico img, .reservado img{
     margin-right: 0.5em;
 }
