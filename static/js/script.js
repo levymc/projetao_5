@@ -123,6 +123,7 @@ if (window.location.pathname === '/main.html') {
   }  
 
   function buscaParticipantes() {
+    let contador = 0;
     
     setInterval(() => {
       let nomesParticipantes = ["Todos"]; // array para armazenar os nomes dos participantes
@@ -133,7 +134,8 @@ if (window.location.pathname === '/main.html') {
         console.log(response.data);
         const participantes = response.data;
         participantes.forEach((participante) => {
-          const divParticipante = `<div class="contato" id="${participante.name}" onclick="nome('${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
+          contador++
+          const divParticipante = `<div class="contato" id="${"pessoa"+contador}" onclick="nome('${"pessoa"+contador}','${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
           div.insertAdjacentHTML("beforeend", divParticipante);
           nomesParticipantes.push(participante.name);
           // const divContato = document.querySelector(`#${participante.name}`);
@@ -160,8 +162,9 @@ if (window.location.pathname === '/main.html') {
   }
   
   
-  function nome(participant) {
-    let divParticipante = document.querySelector(`#${participant}`);
+  function nome(id, participant) {
+    let divParticipante = document.querySelector(`${'#'+id}`);
+    console.log(divParticipante)
     const checkmarkIcon = divParticipante.querySelector('[name="checkmark-outline"]');
     if (checkmarkIcon && checkmarkIcon.parentElement === divParticipante) {
       checkmarkIcon.remove();
