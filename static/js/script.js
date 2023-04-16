@@ -99,24 +99,13 @@ if (window.location.pathname === '/main.html') {
                   `
                 }
               }else{
-                if(!paraQuem){
-                    lista.innerHTML +=`
-                  <li class="msg-private" data-test="message"> 
-                    <div class="msg-hora">(${response.data[i].time})</div>    
-                    <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}</div> 
-                  </li>
-                  `
-                }else{
                   lista.innerHTML +=`
                 <li class="msg-private" data-test="message"> 
                   <div class="msg-hora">(${response.data[i].time})</div>    
                   <div class="msg-text">${response.data[i].from} reservadamente para ${response.data[i].to}: ${response.data[i].text}</div> 
                 </li>
                 `
-                }
-                
               }
-              
             }
               })
           .catch(error => {
