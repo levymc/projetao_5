@@ -87,7 +87,7 @@ if (window.location.pathname === '/main.html') {
                 lista.innerHTML +=`
                 <li class="msg-message" data-test="message"> 
                   <div class="msg-hora">(${response.data[i].time})</div> 
-                  <div class="msg-text">${response.data[i].from} para Todos: ${response.data[i].text}</div> 
+                  <div class="msg-text">${response.data[i].from} para ${quem}: ${response.data[i].text}</div> 
                 </li>`
               }else if (response.data[i].type === "status"){
                 if (document.querySelector('input[name="checkStatus"]').value == '1'){
