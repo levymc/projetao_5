@@ -83,6 +83,7 @@ function enviarMensagem(dados) {
   .catch(error => {
     console.error(2222, error);
     alert("Ocorreu um erro ao enviar a mensagem, tente novamente mais tarde.");
+    window.location.reload();
     retornaAccess();
   });
 }
@@ -104,14 +105,14 @@ function buscarMensagens() {
                 <div class="msg-text">${mensagem.from} para ${mensagem.to}: ${mensagem.text}</div> 
               </li>`
             }else if (mensagem.type === "status"){
-              // if (document.querySelector('input[name="checkStatus"]').value == '1'){
+              if (document.querySelector('input[name="checkStatus"]').value == '0'){
                 lista.innerHTML +=`
                 <li class="msg-access" data-test="message" id="${"message"+contador.toString()}"> 
                   <div class="msg-hora" >(${mensagem.time})</div> 
                   <div class="msg-text">${mensagem.from} ${mensagem.text}</div> 
                 </li>
                 `
-              // }
+              }
             }else{
                 lista.innerHTML +=`
               <li class="msg-private" data-test="message" id="${"message"+contador.toString()}"> 
