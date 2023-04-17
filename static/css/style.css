@@ -102,6 +102,7 @@ body{
     padding: 0.75em;
     box-sizing: border-box;
     display: flex;
+    word-break: break-all;
     flex-wrap: wrap;
     background-color: #DCDCDC;
     border-radius: 2px;
@@ -114,6 +115,7 @@ body{
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
+    word-break: break-all;
     background-color: #DCDCDC;
     border-radius: 2px;
     border: 0.2px solid rgba(128, 128, 128, 0.204);
@@ -124,6 +126,7 @@ body{
     display: flex;
     box-sizing: border-box;
     padding: 0.75em;
+    word-break: break-all;
     flex-wrap: wrap;
     background-color: #FFDEDE;
     border-radius: 2px;
