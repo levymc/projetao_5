@@ -13,7 +13,7 @@ function retornaAccess(){
   window.location.replace('index.html');
 }
 
-if (window.location.pathname === './main.html') {
+if (window.location.pathname === '/main.html') {
   newUser = localStorage.getItem('newUser');
   const checkbox = document.querySelector('input[name="checkStatus"]');
   checkbox.addEventListener('change', function() {
@@ -119,6 +119,7 @@ if (window.location.pathname === './main.html') {
       div.insertAdjacentHTML("beforeend", `<div class="contato" id="pessoa" onclick="nome(\'pessoa\',\'Todos\')" data-participante="Todos" data-test="all"><img src="./static/img/person.svg" id="Todos"  alt="person"> Todos</div>`);
       axios.get("https://mock-api.driven.com.br/api/vm/uol/participants").then((response) => {
         const participantes = response.data;
+        const listaAntes = participantes.slice();
         participantes.forEach((participante) => {
           contador++
           const divParticipante = `<div class="contato" id="${"pessoa"+contador}" onclick="nome('${"pessoa"+contador}','${participante.name}')" data-participante="${participante.name}" data-test="participant"><img src="./static/img/contato.svg" alt="contato"> ${participante.name}</div>`;
@@ -140,7 +141,6 @@ if (window.location.pathname === './main.html') {
       });
     }, 10000);
   }
-  
 
   function toggleCadeado(cadeado) {
     paraQuem = !paraQuem;
