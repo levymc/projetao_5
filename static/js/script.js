@@ -1,9 +1,3 @@
-const url = "https://mock-api.driven.com.br/api/v6/uol/participants"
-// const url = 'https://mock-api.driven.com.br/api/v6/uol/status';
-// const url = 'http://mock-api.driven.com.br/api/v6/uol/messages'
-
-// const form = document.querySelector('form');
-
 axios.defaults.headers.common['Authorization'] = 'knX7klq0NWrHzRzsc8JXodY0';
 
 let newUser;
@@ -19,16 +13,8 @@ function retornaAccess(){
   window.location.replace('index.html');
 }
 
-window.addEventListener('load', function() {
-  if (window.location.pathname === '/main.html') {
-    newUser = localStorage.getItem('newUser');
-    if (newUser) {
-      // newPost(1);
-    }
-  }
-});
-
 if (window.location.pathname === '/main.html') {
+  newUser = localStorage.getItem('newUser');
   const checkbox = document.querySelector('input[name="checkStatus"]');
   checkbox.addEventListener('change', function() {
     if (this.checked) {
@@ -39,8 +25,8 @@ if (window.location.pathname === '/main.html') {
   });
 
   const input = document.querySelector(".msg-input input");
-  input.addEventListener('keydown', function(event) {
-    if (event.keyCode === 13) {
+  input.addEventListener('keydown', function(event) { 
+    if (event.keyCode === 13) { // clicando no enter
       const msg = input.value;
       dados = {
         from: newUser,
@@ -53,6 +39,7 @@ if (window.location.pathname === '/main.html') {
     }
   });
 
+
   function newPost(){
     const msg = input.value;
       dados = {
@@ -63,7 +50,8 @@ if (window.location.pathname === '/main.html') {
     }
     enviarMensagem(dados);
     document.querySelector('.msg-input input').value = ''
-    }
+  }
+
 
   function enviarMensagem(dados) {
     axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", dados).then(response => {
@@ -76,23 +64,26 @@ if (window.location.pathname === '/main.html') {
     });
   }
 
+
   function buscarMensagens() {
+      let contador = 0;
       setInterval(() => {
         axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
             const lista = document.querySelector('.msg-list');
             console.log(response.data)
             lista.innerHTML = ''
             for (i in response.data){
+              contador ++
               if (response.data[i].type === "message"){
                 lista.innerHTML +=`
-                <li class="msg-message" data-test="message"> 
+                <li class="msg-message" data-test="message" id="${"message"+contador.toString()}"> 
                   <div class="msg-hora">(${response.data[i].time})</div> 
-                  <div class="msg-text">${response.data[i].from} para ${quem}: ${response.data[i].text}</div> 
+                  <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}</div> 
                 </li>`
               }else if (response.data[i].type === "status"){
                 if (document.querySelector('input[name="checkStatus"]').value == '1'){
                   lista.innerHTML +=`
-                  <li class="msg-access" data-test="message"> 
+                  <li class="msg-access" data-test="message" id="${"message"+contador.toString()}"> 
                     <div class="msg-hora" >(${response.data[i].time})</div> 
                     <div class="msg-text">${response.data[i].from} entra na sala...</div> 
                   </li>
@@ -100,12 +91,14 @@ if (window.location.pathname === '/main.html') {
                 }
               }else{
                   lista.innerHTML +=`
-                <li class="msg-private" data-test="message"> 
+                <li class="msg-private" data-test="message" id="${"message"+contador.toString()}"> 
                   <div class="msg-hora">(${response.data[i].time})</div>    
                   <div class="msg-text">${response.data[i].from} reservadamente para ${response.data[i].to}: ${response.data[i].text}</div> 
                 </li>
                 `
               }
+              // const elementoAparecer = document.querySelector("#message"+`${contador.toString()}`);
+              // elementoAparecer.scrollIntoView();
             }
               })
           .catch(error => {
@@ -115,6 +108,7 @@ if (window.location.pathname === '/main.html') {
           });
       }, 3000);
   }  
+
 
   function buscaParticipantes() {
     let contador = 0;
@@ -224,9 +218,6 @@ if (window.location.pathname === '/main.html') {
     }, 5000);
   }
 
-  buscaParticipantes()
-  conexao();
-  buscarMensagens();
 
   function abrirSidebar(){
     const sidebar = document.querySelector('.sidebar');
@@ -237,7 +228,6 @@ if (window.location.pathname === '/main.html') {
     sidebar.style.right = '0';
     overlay.style.display = 'block';
   }
-
 
   // Para esconder a sidebar novamente quando o usuário clicar em outro lugar da página
   window.addEventListener('click', (e) => {
@@ -250,4 +240,10 @@ if (window.location.pathname === '/main.html') {
     }
   });
 
+  buscaParticipantes()
+  conexao();
+  buscarMensagens();
+
 };
+
+
