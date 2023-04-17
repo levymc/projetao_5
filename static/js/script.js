@@ -13,7 +13,7 @@ function retornaAccess(){
   window.location.replace('index.html');
 }
 
-if (window.location.pathname === '/main.html') {
+if (window.location.pathname === './main.html') {
   newUser = localStorage.getItem('newUser');
   const checkbox = document.querySelector('input[name="checkStatus"]');
   checkbox.addEventListener('change', function() {
