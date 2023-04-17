@@ -8,6 +8,29 @@ const segundo = agora.getSeconds();
 let quem = "Todos";
 let tipo = "message";
 let paraQuem = true;
+let atuais ;
+let antigos ;
+let userOnline = () => {
+  setInterval(() => {
+    
+    setInterval(() => {
+      axios.get("https://mock-api.driven.com.br/api/vm/uol/participants").then((response) => {
+        const participantes = response.data;
+        const listaAntes = participantes.slice();
+        atuais = participantes;
+        participantes.forEach((participante) => {
+          // console.log(participante)
+        });
+        let valoresDiferentes = atuais.filter((participante) => !antigos.includes(participante));
+        // console.log(antigos, atuais ,valoresDiferentes)
+      })
+    }, 3000)
+    antigos = atuais
+
+  },3000)
+}
+
+userOnline()
 
 function retornaAccess(){
   window.location.replace('index.html');
@@ -66,41 +89,39 @@ function enviarMensagem(dados) {
 
 
 function buscarMensagens() {
+    const lista = document.querySelector('.msg-list');
     let contador = 0;
     setInterval(() => {
       axios.get("https://mock-api.driven.com.br/api/vm/uol/messages").then(response => {
-          const lista = document.querySelector('.msg-list');
-          console.log(response.data)
           lista.innerHTML = ''
-          for (i in response.data){
+          response.data.forEach(mensagem => {
+            console.log(mensagem.type, mensagem.time, mensagem.from, mensagem.text)
             contador ++
-            if (response.data[i].type === "message"){
+            if (mensagem.type === "message"){
               lista.innerHTML +=`
               <li class="msg-message" data-test="message" id="${"message"+contador.toString()}"> 
-                <div class="msg-hora">(${response.data[i].time})</div> 
-                <div class="msg-text">${response.data[i].from} para ${response.data[i].to}: ${response.data[i].text}</div> 
+                <div class="msg-hora">(${mensagem.time})</div> 
+                <div class="msg-text">${mensagem.from} para ${mensagem.to}: ${mensagem.text}</div> 
               </li>`
-            }else if (response.data[i].type === "status"){
-              if (document.querySelector('input[name="checkStatus"]').value == '1'){
+            }else if (mensagem.type === "status"){
+              // if (document.querySelector('input[name="checkStatus"]').value == '1'){
                 lista.innerHTML +=`
                 <li class="msg-access" data-test="message" id="${"message"+contador.toString()}"> 
-                  <div class="msg-hora" >(${response.data[i].time})</div> 
-                  <div class="msg-text">${response.data[i].from} entra na sala...</div> 
+                  <div class="msg-hora" >(${mensagem.time})</div> 
+                  <div class="msg-text">${mensagem.from} ${mensagem.text}</div> 
                 </li>
                 `
-              }
+              // }
             }else{
                 lista.innerHTML +=`
               <li class="msg-private" data-test="message" id="${"message"+contador.toString()}"> 
-                <div class="msg-hora">(${response.data[i].time})</div>    
-                <div class="msg-text">${response.data[i].from} reservadamente para ${response.data[i].to}: ${response.data[i].text}</div> 
+                <div class="msg-hora">(${mensagem.time})</div>    
+                <div class="msg-text">${mensagem.from} reservadamente para ${mensagem.to}: ${mensagem.text}</div> 
               </li>
               `
             }
-            // const elementoAparecer = document.querySelector("#message"+`${contador.toString()}`);
-            // elementoAparecer.scrollIntoView();
-          }
-          lista.scrollTop = lista.scrollHeight;
+            lista.scrollTop = lista.scrollHeight;
+          })
             })
         .catch(error => {
           console.error(999,error);
@@ -209,7 +230,7 @@ function conexao(){
     axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
       name: newUser,
     }).then(response => {
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch(error => {
       console.error(error);

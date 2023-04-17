@@ -93,11 +93,12 @@ body{
     flex-direction: column;
     overflow-y: auto;
     gap: 0.25em;
-    width: 100%;
-    
+    width: 100vw;
+    overflow-x: hidden;
 }
 .msg-access{
     gap: 1em;
+    width: 100vw;
     padding: 0.75em;
     box-sizing: border-box;
     display: flex;
@@ -108,6 +109,7 @@ body{
 }
 .msg-message{
     gap: 1em;
+    width: 100vw;
     padding: 0.75em;
     box-sizing: border-box;
     display: flex;
@@ -118,6 +120,7 @@ body{
 }
 .msg-private{
     gap: 1em;
+    width: 100vw;
     display: flex;
     box-sizing: border-box;
     padding: 0.75em;
@@ -136,6 +139,12 @@ body{
   }
 .msg-text{
     user-select:text;
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+.msg-hora{
+    width: 5vw;
 }
 .aviao{
     position: absolute;
